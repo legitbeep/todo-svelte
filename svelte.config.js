@@ -11,7 +11,16 @@ const config = {
 		adapter: adapter(), // deployment option such as vercel .
 
 		// hydrate the <div id="svelte"> element in src/app.html
-		target: '#svelte'
+		target: '#svelte',
+		vite: {
+			server: {
+				// hot module reloading
+				hmr: {
+					clientPort: proces.env.HMR_HOST ? 443 : 3000,
+					host: proces.env.HMR_HOST ? proces.env.HMR_HOST.substring("https://".length) : "localhost"
+				}
+			}
+		}
 	}
 };
 
