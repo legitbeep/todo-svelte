@@ -14,7 +14,7 @@
         border-radius: 0.75rem;
         transform: translate(-1px, -1px);
         transition: filter 0.2s, transform 0.2s;
-        filter: drop-shadow(2px 4px 6px rgba(0,0,0, 0.1));
+        filter: drop-shadow(2px 4px 6px rgba(0,0,0, 0.3));
     }
     button {
         display: flex;
@@ -70,21 +70,21 @@
     .delete button:hover{
         opacity: 1;
     }
-    /* Uncomment when API added */
-    /* .done {
+    
+    .done {
         transform: none;
-        opacity: 0.4;
+        opacity: 0.6;
         filter: drop-shadow(0 0 1px rgba(0,0,0,0.1));
     }   
     .done .toggle button {
         background-image: url("data:image/svg+xml,%3Csvg width='22' height='16' viewBox='0 0 22 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 1.5L7.4375 14.5L1.5 8.5909' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    } */
+    }
 </style>
-
-<div class="todo-item done">
-    <form action="" method="" class="toggle">
-        <input type="hidden" name="done" value="" >
-        <button aria-label="Mark Done/Not Done"></button>
+<!-- conditional class in svelte exclusive -->
+<div class="todo-item" class:done={todo.done}>
+    <form action="/api/todos/{todo.id}.json?_method=patch" method="post" class="toggle">
+        <input type="hidden" name="done" value="{todo.done ? "" : "true"}" >
+        <button aria-label="Mark {todo.done? "not done" : "done"}"></button>
     </form>
     <form action="/api/todos/{todo.id}.json?_method=patch" method="post" class="text">
         <input type="text" name="text" value={todo.text}>
