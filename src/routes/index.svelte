@@ -5,14 +5,42 @@
 	const title = 'Todo';
 </script>
 
+<style>	
+	i {
+		color: var(--accent-color);
+	}
+	section{
+		margin: 4rem 0;
+	}
+	.todo-form{
+		margin-bottom: 0.5rem;
+	}
+	.todo-form input {
+		font-size: 28px;
+		width: 100%;
+		padding: 0.5rem 1rem;
+		box-sizing: border-box;
+		text-align: center;
+		border-radius: 0.75rem;
+		background: rgba(255,255,255, 0.05);
+	}
+	section :global(input) {
+		border: 1px solid transparent;
+	}
+	section :global(input:focus-visible){
+		border: 1px solid var(--accent-color) !important;
+		outline: none;
+		box-shadow: inset 1px 1px 6px rgba(0,0,0,0.1);
+	}
+</style>
+	<!-- target all inputs inside todo using :global method -->
 <svelte:head><title>{title}</title></svelte:head>
-
 
 <section>
 	<h1>
 		{title} <i>Svelte</i>
 	</h1>
-	<form action="" method="POST">
+	<form action="" method="POST" class="todo-form" >
 		<input type="text" name="todo" placeholder="+ Type to add todo" aria-label="add todo" />
 	</form>
 
