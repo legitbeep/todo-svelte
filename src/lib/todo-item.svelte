@@ -86,10 +86,11 @@
         <input type="hidden" name="done" value="" >
         <button aria-label="Mark Done/Not Done"></button>
     </form>
-    <form action="" method="" class="text">
-        <input type="text" value={todo.text}>
-        <button aria-label="Save Todo"></button> 
+    <form action="/api/todos/{todo.id}.json?_method=patch" method="post" class="text">
+        <input type="text" name="text" value={todo.text}>
+        <button aria-label="Save Todo" type="submit"></button> 
     </form>
+    <!-- HTML form supports only POST/GET requests 😢-->
     <form action="/api/todos/{todo.id}.json?_method=delete" method="post" class="delete">
         <button aria-label="Delte Todo"></button>
     </form>
