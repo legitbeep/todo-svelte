@@ -1,7 +1,31 @@
+<script lang="ts" context="module">
+	import type {Load} from '@sveltejs/kit';
+
+	// Basically means getInitialProps 
+	// this fetch is different from browser provided fetch method
+	export const load: Load = async ({ fetch }) => {
+		const res = await fetch("/api/todos.json");
+
+		if (res.ok){
+			const todos = await res.json();
+			return {
+				props : {todos},
+			}
+		}
+
+		const { message } = await res.json();
+		return {
+			error: new Error(message)
+		}
+	}
+</script>
+
 <script lang="ts">
 	// lib is has preconfigured path variable, can be accesed as follow:
 	import TodoItem from '$lib/todo-item.svelte';
 
+	// will be recieved from function above
+	export let todos: Todo[];
 	const title = 'Todo';
 </script>
 
@@ -40,10 +64,12 @@
 	<h1>
 		{title} <i>Svelte</i>
 	</h1>
-	<form action="" method="POST" class="todo-form" >
+	<form action="/api/todos.json" method="POST" class="todo-form" >
 		<input type="text" name="todo" placeholder="+ Type to add todo" aria-label="add todo" />
 	</form>
 
-	<TodoItem />
+	{#each todos as todo}
+	<TodoItem {todo} />
+	{/each}
 </section>
 
