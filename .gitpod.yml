@@ -1,3 +1,4 @@
+# For reference see https://www.gitpod.io/docs/references/gitpod-yml
 tasks:
   - init: npm install
     command: |
@@ -14,3 +15,9 @@ vscode:
   extensions:
   - svelte.svelte-vscode
   - zhuangtongfa.material-theme
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
