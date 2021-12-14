@@ -90,8 +90,7 @@
         <input type="text" value={todo.text}>
         <button aria-label="Save Todo"></button> 
     </form>
-    <form action="" method="" class="delete">
+    <form action="/api/todos/{todo.id}.json?_method=delete" method="post" class="delete">
         <button aria-label="Delte Todo"></button>
     </form>
-
 </div>
