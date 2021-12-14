@@ -16,8 +16,8 @@ const config = {
 			server: {
 				// hot module reloading
 				hmr: {
-					clientPort: proces.env.HMR_HOST ? 443 : 3000,
-					host: proces.env.HMR_HOST ? proces.env.HMR_HOST.substring("https://".length) : "localhost"
+					clientPort: process.env.HMR_HOST ? 443 : 3000,
+					host: process.env.HMR_HOST ? process.env.HMR_HOST.substring("https://".length) : "localhost"
 				}
 			}
 		}
