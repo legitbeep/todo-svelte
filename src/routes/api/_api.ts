@@ -34,8 +34,11 @@ export const api = (request: Request, data?: Record<string, unknown>) => {
       default:
         break;
     }
-  
-    if (request.method.toUpperCase() !== "GET") {
+
+    // It only redirects if browsers sends the request
+    // browser doesnt add headers by default
+    if (request.method.toUpperCase() !== "GET" &&
+    request.headers.accept !== "application/json") {
       return {
         status: 303,
         headers: {

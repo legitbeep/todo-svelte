@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import type {Load} from '@sveltejs/kit';
+	import { enhance } from '$lib/actions/form';
 
 	// Basically means getInitialProps 
 	// this fetch is different from browser provided fetch method
@@ -27,6 +28,14 @@
 	// will be recieved from function above
 	export let todos: Todo[];
 	const title = 'Todo';
+
+	const handleSubmit = async (res: Response, form:HTMLFormElement) => {
+		const newTodo = await res.json();
+		// since arr is reference svelte doesnt catch changes if 
+		// we push in array
+		todos = [...todos, newTodo];
+		form.reset();
+	}
 </script>
 
 <style>	
@@ -64,7 +73,7 @@
 	<h1>
 		{title} <i>Svelte</i>
 	</h1>
-	<form action="/api/todos.json" method="POST" class="todo-form" >
+	<form action="/api/todos.json" method="POST" class="todo-form" use:enhance={{callBack: handleSubmit}} >
 		<input type="text" name="todo" placeholder="+ Type to add todo" aria-label="add todo" />
 	</form>
 
