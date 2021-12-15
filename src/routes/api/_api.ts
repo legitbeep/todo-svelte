@@ -21,13 +21,16 @@ export const api = (request: Request, data?: Record<string, unknown>) => {
         status = 200;
         break;
       case "PATCH":
+        let newTodo :Todo;
         todos = todos.map(todo => {
           if (todo.id === request.params.id) {
             if (data.text) todo.text = data.text as string;
             else todo.done = data.done as boolean;
+            newTodo = todo;
           }
           return todo;
         });
+        body = newTodo;
         status = 200;
         break;
     

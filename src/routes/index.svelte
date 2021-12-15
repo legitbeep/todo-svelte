@@ -36,6 +36,18 @@
 		todos = [...todos, newTodo];
 		form.reset();
 	}
+	const handleDelete = (todo: Todo) => {
+		todos = todos.filter(t => t.id !== todo.id);
+	}
+	const handleUpdate = async (res: Response) => {
+		const newTodo = await res.json();
+		todos = todos.map(todo => {
+			if ( todo.id === newTodo.id ){
+				todo = newTodo;
+			}
+			return todo;
+		})
+	}
 </script>
 
 <style>	
@@ -78,7 +90,7 @@
 	</form>
 
 	{#each todos as todo}
-	<TodoItem {todo} />
+	<TodoItem {todo} handleDelete={() => handleDelete(todo)} {handleUpdate} />
 	{/each}
 </section>
 

@@ -1,6 +1,10 @@
 <script lang="ts">
-    // Recieve props from parent
+    import { enhance } from '$lib/actions/form';
+    
+    // Below are the props to be revcieved from parent
     export let todo: Todo;
+    export let handleDelete: () => void;
+    export let handleUpdate: (res:Response) => void;
 </script>
 <style>
     .todo-item{
@@ -82,16 +86,22 @@
 </style>
 <!-- conditional class in svelte exclusive -->
 <div class="todo-item" class:done={todo.done}>
-    <form action="/api/todos/{todo.id}.json?_method=patch" method="post" class="toggle">
+    <form action="/api/todos/{todo.id}.json?_method=patch" method="post" class="toggle" use:enhance={{
+        callBack: handleUpdate
+    }}>
         <input type="hidden" name="done" value="{todo.done ? "" : "true"}" >
         <button aria-label="Mark {todo.done? "not done" : "done"}"></button>
     </form>
-    <form action="/api/todos/{todo.id}.json?_method=patch" method="post" class="text">
+    <form action="/api/todos/{todo.id}.json?_method=patch" method="post" class="text" use:enhance={{
+        callBack: handleUpdate
+    }}>
         <input type="text" name="text" value={todo.text}>
         <button aria-label="Save Todo" type="submit"></button> 
     </form>
     <!-- HTML form supports only POST/GET requests 😢-->
-    <form action="/api/todos/{todo.id}.json?_method=delete" method="post" class="delete">
+    <form action="/api/todos/{todo.id}.json?_method=delete" method="post" class="delete" use:enhance={{
+        callBack:handleDelete
+    }}>
         <button aria-label="Delte Todo"></button>
     </form>
 </div>
