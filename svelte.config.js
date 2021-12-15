@@ -1,3 +1,4 @@
+// adapter tries to determine the environment we trying to build & deploy to
 import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
 
