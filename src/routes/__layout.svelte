@@ -14,6 +14,6 @@
 <!-- Replace content below with respective URL content -->
 <slot />
 <footer>
-    {new Date().getFullYear()} - <a href="https://github.com/legitbeep" aria-label="legitbeep profile link" >legitbeep</a>
+    {new Date().getFullYear()} - <a href="https://github.com/legitbeep" target="_blank" aria-label="legitbeep profile link" >legitbeep</a>
 </footer>
 </main>
