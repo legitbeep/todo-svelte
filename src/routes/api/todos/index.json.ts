@@ -6,5 +6,5 @@ export const get: RequestHandler = (request) => {
 }
 
 export const post:RequestHandler<{}, FormData> = (request) => {
-    return api(request, { text: request.body.get("todo"), done: false, created_at: new Date(), id: `${Date.now()}`});
+    return api(request, { text: request.body.get("todo"), done: false, created_at: new Date() });
 }

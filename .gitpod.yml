@@ -1,3 +1,4 @@
+---
 # For reference see https://www.gitpod.io/docs/references/gitpod-yml
 image: gitpod/workspace-postgres
 
@@ -8,17 +9,26 @@ tasks:
       echo "🚀 Starting Server..."
       npm run dev
       echo "🎉 Server Started!"
+    env:
+      DATABASE_URL: postgres://gitpod@localhost/todos
+  - command: |
+      npx prisma studio 
+    env:
+      DATABASE_URL: postgres://gitpod@localhost/todos
 
 ports:
   - port: 3000
     onOpen: open-browser
   - port: 5432
     onOpen: ignore
+  - port: 5555
+    onOpen: open-browser
 
 vscode:
   extensions:
   - svelte.svelte-vscode
   - zhuangtongfa.material-theme
+  - prisma.prisma
 
 github:
   prebuilds:

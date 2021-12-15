@@ -1,0 +1,18 @@
+// Used https://www.prisma.io/docs/concepts/components/prisma-schema for reference
+datasource db {
+    provider = "postgresql"
+    // localy would be "postgres://gitpod@locahost/todos"
+    url = env("DATABASE_URL") 
+}
+
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native"]
+}
+
+model Todo{
+    id String @id @default(cuid())
+    created_at DateTime
+    text String
+    done Boolean
+}
